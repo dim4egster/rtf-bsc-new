@@ -1,54 +1,32 @@
 version: '3.6'
+
+volumes:
+  data:
+  config:
+
 services:
-  init:
-    image: alpine
-    command:
-      - /bin/sh
-      - -c
-      - |
-        chown -R 1000:1000 /data
-
-        echo "done grany data directory permission"
-    volumes:
-      - data:/data
-
-  rtf:
+  rtf_t:
     build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - NETWORK=mainnet
+      context: ../../..
+      dockerfile: ./ops/testnet/rpc-node/Dockerfile
     restart: unless-stopped
     ports:
-      - 30303:30303
-      - 30311:30311
-      - 8545:8545
-      - 8546:8546
-      - 8575:8575
-      - 8576:8576
+      - ${P2P_PORT}:${P2P_PORT}
+      - ${RPC_PORT}:${RPC_PORT}
+      - ${WS_PORT}:${WS_PORT}
     healthcheck:
       test: |
-        [[ "$NETWORK" == "testnet" ]] && PORT=8575 || PORT=8545;
-        netstat -tunlp | grep $PORT > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
-
+        netstat -tunlp | grep ${RPC_PORT} > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
       interval: 5s
       retries: 5
       start_period: 10s
       timeout: 3s
     volumes:
-      - data:/data
-      - config:/rtf/config
+      - "data:/data"
+      - "config:/rtf/config"
+      - "../configs/config.toml:/rtf/config/config.toml"
+    environment:
+      - P2P_PORT
+      - RPC_PORT
+      - WS_PORT
 
-volumes:
-  config:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/tmp/rtf/config/mainnet'
-  data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/tmp/rtf/data/mainnet'

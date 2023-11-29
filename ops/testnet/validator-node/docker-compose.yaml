@@ -5,24 +5,18 @@ volumes:
   config:
 
 services:
-  rtf:
+  rtf_t:
     build:
       context: ../../..
       dockerfile: ./ops/testnet/validator-node/Dockerfile
     restart: unless-stopped
     ports:
-      - 30504:30504
-      - 30303:30303
-      - 30311:30311
-      - 8545:8545
-      - 8546:8546
-      - 8575:8575
-      - 8576:8576
+      - ${P2P_PORT}:${P2P_PORT}
+      - ${RPC_PORT}:${RPC_PORT}
+      - ${WS_PORT}:${WS_PORT}
     healthcheck:
       test: |
-        [[ "$NETWORK" == "testnet" ]] && PORT=8575 || PORT=8545;
-        netstat -tunlp | grep $PORT > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
-
+        netstat -tunlp | grep ${RPC_PORT} > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
       interval: 5s
       retries: 5
       start_period: 10s
@@ -35,4 +29,7 @@ services:
       - VALIDATOR_KEY
       - VALIDATOR_ADDRESS
       - NODE_KEY
+      - P2P_PORT
+      - RPC_PORT
+      - WS_PORT
 

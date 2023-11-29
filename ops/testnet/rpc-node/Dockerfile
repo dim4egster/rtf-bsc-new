@@ -22,11 +22,11 @@ RUN cd /go-ethereum && go run build/ci.go install -static ./cmd/geth
 # Pull Geth into a second stage deploy alpine container
 FROM alpine:3.17
 
-ARG RTF_USER=bsc
+ARG RTF_USER=rtf
 ARG RTF_USER_UID=1000
 ARG RTF_USER_GID=1000
 
-ENV RTF_HOME=/bsc
+ENV RTF_HOME=/rtf
 ENV HOME=${RTF_HOME}
 ENV DATA_DIR=/data
 
@@ -47,7 +47,7 @@ WORKDIR ${RTF_HOME}
 
 COPY --from=builder /go-ethereum/build/bin/geth /usr/local/bin/
 
-COPY docker-entrypoint.sh ./
+COPY ./ops/testnet/rpc-node/docker-entrypoint.sh ./
 
 RUN chmod +x docker-entrypoint.sh \
     && mkdir -p ${DATA_DIR} \
