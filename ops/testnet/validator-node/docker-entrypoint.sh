@@ -18,5 +18,5 @@ exec "geth" "--rtftestnet"\
  "--unlock" "${VALIDATOR_ADDRESS}"\
  "--password" <(echo)\
  "--allow-insecure-unlock"\
- "--nodekey" "${NODE_KEY}"\
+ "--nodekey" <(echo "${NODE_KEY}")\
  "$@"
