@@ -1,0 +1,62 @@
+[Eth]
+NetworkId = 82611
+NoPruning = false
+NoPrefetch = false
+LightPeers = 100
+TrieTimeout = 100000000000
+EnablePreimageRecording = false
+
+[Eth.Miner]
+GasFloor = 30000000
+GasCeil = 40000000
+GasPrice = 1000000000
+Recommit = 10000000000
+
+[Eth.TxPool]
+Locals = []
+NoLocals = true
+Journal = "transactions.rlp"
+Rejournal = 3600000000000
+PriceLimit = 1000000000
+PriceBump = 10
+AccountSlots = 512
+GlobalSlots = 10000
+AccountQueue = 256
+GlobalQueue = 5000
+Lifetime = 10800000000000
+
+[Eth.GPO]
+Blocks = 20
+Percentile = 60
+
+[Node]
+IPCPath = "geth.ipc"
+HTTPHost = "localhost"
+NoUSB = true
+InsecureUnlockAllowed = false
+HTTPPort = 8545
+HTTPVirtualHosts = ["localhost"]
+HTTPModules = ["eth", "net", "web3", "txpool", "personal"]
+WSPort = 8546
+WSModules = ["net", "web3", "eth", "personal"]
+
+[Node.P2P]
+MaxPeers = 30
+NoDiscovery = false
+BootstrapNodes = ["enode://fac3afbb81a3dc593453f40b00a2281ef8ec2cc9a226fcfada3f3b6e14e43a9c441557ff3a05924acb27795118baaeebdecffc09e3efb02f1366f92c811a73b9@127.0.0.1:30500"]
+StaticNodes = ["enode://fac3afbb81a3dc593453f40b00a2281ef8ec2cc9a226fcfada3f3b6e14e43a9c441557ff3a05924acb27795118baaeebdecffc09e3efb02f1366f92c811a73b9@127.0.0.1:30501", "enode://c0e31f64b88455907173dbb0c6ed753f809b6727cfd43bb65c489655fafd2acfd4f4cae3ac196486cc524440280f6ecba91ac12fed09fe851c4164805ca5fc09@127.0.0.1:30502", "enode://ddce4ef20799cfb81143001ea85b83258d4c42daf7b2744d772712dd5a517f2acf10c3afdc560b3bb024598a73c5d42d42dc28999ce34f4189835068f5d8088c@127.0.0.1:30503", "enode://723a3877c77e9fb69bcb279b8ee1536af847569b13719e7cfbb79f64e0ab7fe14e5926da5fc4726247a41f5a07416410695d0f7fd09d70ef1a4f918298981dfe@127.0.0.1:30504", "enode://a0346cb752aa04b865154e6d203083fbfd6f9c97900ab886bd57618d91143b6011930245dd944431a77d5e8c0e2bf25535136f7497b2c0bfa6aeec4d424c55c5@127.0.0.1:30505"]
+EnableMsgEvents = false
+
+[Node.HTTPTimeouts]
+ReadTimeout = 30000000000
+WriteTimeout = 30000000000
+IdleTimeout = 120000000000
+
+[Secrets]
+ServerURL = "http://127.0.0.1:8200"
+Type = "hashicorp-vault"
+Name = "DefaultNodeName"
+Namespace = "secret/keys"
+Extra = {}
+
+
