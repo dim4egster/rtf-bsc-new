@@ -21,6 +21,7 @@ if [ ! -d "$GETH_DIR" ]; then
   exec "geth" "--rtftestnet"\
    "--config" "${RTF_CONFIG}"\
    "--miner.etherbase" "${VALIDATOR_ADDRESS}"\
+   "--mine"\
    "--datadir" "${DATA_DIR}"\
    "--unlock" "${VALIDATOR_ADDRESS}"\
    "--password" <(echo)\
