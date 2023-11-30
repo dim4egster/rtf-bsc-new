@@ -20,6 +20,4 @@ exec "geth" "--rtftestnet"\
  "--allow-insecure-unlock"\
  "--nodekey" <(echo "${NODE_KEY}")\
  "--port" "${P2P_PORT}"\
- "--http.port" "${RPC_PORT}"\
- "--ws.port" "${WS_PORT}"\
  "$@"

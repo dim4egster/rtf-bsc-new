@@ -57,7 +57,4 @@ VOLUME ${DATA_DIR}
 
 USER ${RTF_USER_UID}:${RTF_USER_GID}
 
-# rpc ws graphql
-EXPOSE 8545 8546 8547 30303 30303/udp
-
 ENTRYPOINT ["/sbin/tini", "--", "./docker-entrypoint.sh"]
