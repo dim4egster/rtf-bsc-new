@@ -1,0 +1,25 @@
+version: '3.6'
+
+volumes:
+  data:
+  config:
+
+services:
+  rtf_t:
+    build:
+      context: ../../..
+      dockerfile: ./ops/mainnet/rpc-node/Dockerfile
+    restart: unless-stopped
+    ports:
+      - ${P2P_PORT}:${P2P_PORT}
+      - ${RPC_PORT}:${RPC_PORT}
+      - ${WS_PORT}:${WS_PORT}
+    volumes:
+      - "data:/data"
+      - "config:/rtf/config"
+      - "../configs/config.toml:/rtf/config/config.toml"
+    environment:
+      - P2P_PORT
+      - RPC_PORT
+      - WS_PORT
+

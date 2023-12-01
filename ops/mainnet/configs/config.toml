@@ -1,0 +1,58 @@
+[Eth]
+NetworkId = 3332199
+NoPruning = false
+NoPrefetch = false
+LightPeers = 100
+TrieTimeout = 100000000000
+EnablePreimageRecording = false
+
+[Eth.Miner]
+GasFloor = 30000000
+GasCeil = 40000000
+GasPrice = 1000000000
+Recommit = 10000000000
+
+[Eth.TxPool]
+Locals = []
+NoLocals = true
+Journal = "transactions.rlp"
+Rejournal = 3600000000000
+PriceLimit = 1000000000
+PriceBump = 10
+AccountSlots = 512
+GlobalSlots = 10000
+AccountQueue = 256
+GlobalQueue = 5000
+Lifetime = 10800000000000
+
+[Eth.GPO]
+Blocks = 20
+Percentile = 60
+
+[Node]
+IPCPath = "geth.ipc"
+NoUSB = true
+InsecureUnlockAllowed = false
+HTTPModules = ["eth", "net", "web3", "txpool", "personal"]
+WSModules = ["net", "web3", "eth", "personal"]
+
+[Node.P2P]
+MaxPeers = 30
+NoDiscovery = false
+BootstrapNodes = []
+StaticNodes = []
+EnableMsgEvents = false
+
+[Node.HTTPTimeouts]
+ReadTimeout = 30000000000
+WriteTimeout = 30000000000
+IdleTimeout = 120000000000
+
+[Secrets]
+ServerURL = "http://127.0.0.1:8200"
+Type = "hashicorp-vault"
+Name = "DefaultNodeName"
+Namespace = "secret/keys"
+Extra = {}
+
+
